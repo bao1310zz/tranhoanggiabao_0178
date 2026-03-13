@@ -1,0 +1,101 @@
+Haha, nhìn cái giao diện của bạn bị trình duyệt tự động dịch tấu hài chưa kìa! 😂
+
+Chữ "Key" (Khóa) bị Google Translate tự động dịch thành "Chú thích (Từ)", còn chữ "Plain text" lại dính cả ký tự tiếng Nga "Великая..." gì đó luôn. Nguyên nhân là do ở thẻ HTML trên cùng, mình đang để lang="en" (tiếng Anh) nên trình duyệt Chrome/Edge của bạn tự động nhảy ra dịch toàn bộ trang web sang tiếng Việt một cách rất máy móc.
+
+Để fix triệt để vụ này và dùng đúng từ vựng chuyên ngành mật mã, mình đã đổi thẻ ngôn ngữ thành lang="vi" để chặn trình duyệt tự dịch, đồng thời tự tay viết lại toàn bộ nhãn thành Bản rõ, Bản mã và Khóa cho chuẩn xác nhất.
+
+Bạn copy đè đoạn code HTML này vào lại nhé, đảm bảo hết sạch mấy chữ kỳ cục kia:
+
+HTML
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayFair Cipher</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f6f9;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+        .cipher-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 800;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cipher-container">
+            <h2>Mã hóa PlayFair</h2>
+            
+            <div class="card mb-4 border-warning shadow-sm">
+                <div class="card-header bg-warning text-dark fw-bold">
+                    1. TẠO MA TRẬN
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/creatematrix">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Khóa (Key):</label>
+                            <input type="text" class="form-control" name="inputKeyMatrix" placeholder="Nhập khóa để tạo ma trận 5x5 (VD: MONARCHY)" required autofocus/>
+                        </div>
+                        <button type="submit" class="btn btn-warning w-100 fw-bold">Tạo ma trận</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card mb-4 border-primary shadow-sm">
+                <div class="card-header bg-primary text-white fw-bold">
+                    2. MÃ HÓA
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/encrypt">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Bản rõ (Plain text):</label>
+                            <input type="text" class="form-control" name="inputPlainText" placeholder="Nhập văn bản cần mã hóa..." required/>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Khóa (Key):</label>
+                            <input type="text" class="form-control" name="inputKeyPlain" placeholder="VD: MONARCHY" required/>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 fw-bold">Mã hóa</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card border-success shadow-sm">
+                <div class="card-header bg-success text-white fw-bold">
+                    3. GIẢI MÃ
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/decrypt">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Bản mã (Cipher text):</label>
+                            <input type="text" class="form-control" name="inputCipherText" placeholder="Nhập văn bản cần giải mã..." required/>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Khóa (Key):</label>
+                            <input type="text" class="form-control" name="inputKeyCipher" placeholder="VD: MONARCHY" required/>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100 fw-bold">Giải mã</button>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
